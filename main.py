@@ -20,6 +20,14 @@ version = "0.1"
 debug = False
 
 #
+# GPIO Pin belegung: https://pinout.xyz/
+#
+pins = {
+    "input": [25, 8, 7, 11],
+    "output": [9, 10, 27]
+}
+
+#
 # Komandozeilenargumente Auslesen
 #
 for i in argv:
@@ -40,10 +48,33 @@ for i in argv:
 # Den eigendlichen Code des Programmes:
 #
 def main():
-    if debug: print("[I] Starte 'while True'-Schleife\n")
+    #
+    # GPIOs einstellen
+    # https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/
+    #
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BOARD)
+    for key, value in pins.items():
+        GPIO.setup(value, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    if debug: print("[I] Konfiguriere GPIOs\n[I] Starte 'while True'-Schleife\n")
     while True:
-        sleep(1)
+        sleep(0.1)
+        #
+        # ermittle GPIO Input Signale
+        #
+        for key, value in pins.items():
+            for pin in value:
+                if not GPIO.input(pin):
+                    if debug: print("\nPin {} wurde berührt | Key = {}".format(pin, key))
 
+
+        #
+        # Schalte GPIO Output
+        #
+
+#
+# main() ausführen
+#
 try:
     main()
 except KeyboardInterrupt:
