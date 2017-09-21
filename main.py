@@ -23,8 +23,10 @@ debug = False
 # GPIO Pin belegung: https://pinout.xyz/
 #
 pins = {
-    "input": [25, 8, 7, 11],
-    "output": [9, 10, 27]
+    "input": [31, 33, 35, 37],  # Input-Pins
+    "RX": [0, 0, 0, 0],         # Input-Values
+    "output": [3, 5, 7],  # Output-Pins
+    "TX":  [0, 0, 0],     # Output-Values
 }
 
 #
@@ -52,25 +54,39 @@ def main():
     # GPIOs einstellen
     # https://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/
     #
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False) #  Keine nerfigen sinnlosen Meldungen
+    GPIO.setmode(GPIO.BOARD) # Nutze BOARD nicht BCM.
+    if debug: print("[I] Einrichten der Raspberry Pi GPIOs:")
     for key, value in pins.items():
-        GPIO.setup(value, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    if debug: print("[I] Konfiguriere GPIOs\n[I] Starte 'while True'-Schleife\n")
+        if debug: print("    " + key + " " + str(value) )
+        if key == "input":
+            for i in value:
+                GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        elif key == "output":
+            for i in value:
+                GPIO.setup(i, GPIO.OUT)
+                
+    if debug: print("[I] Konfigurien der GPIOs abgeschlossen\n[I] Starte 'while True'-Schleife\n")
     while True:
         sleep(0.1)
         #
         # ermittle GPIO Input Signale
         #
-        for key, value in pins.items():
-            for pin in value:
-                if not GPIO.input(pin):
-                    if debug: print("\nPin {} wurde berührt | Key = {}".format(pin, key))
+        i = 0
+        while i < len(pins["input"]):
+            pins["RX"][i] = GPIO.input(pins["input"][i])
+            if debug: print("GPIO Input: " + str(pins["input"][i]) + " = " + str(pins["RX"][i]))
+            i = i + 1
 
 
         #
         # Schalte GPIO Output
         #
+
+
+
+
+        
 
 #
 # main() ausführen
