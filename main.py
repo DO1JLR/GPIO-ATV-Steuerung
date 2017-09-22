@@ -99,9 +99,14 @@ def main():
         #
         # Uebersetze Input in die variablen
         #
+        input_string = "0b" + str(pins["RX"][0]) + str(pins["RX"][1]) + str(pins["RX"][2])+ str(pins["RX"][3])
         for key, value in binary.items():
-            print(key + " " + value)
-
+            if int(key, 2) == int(input_string, 2):
+                binary[key] = True
+            else:
+                binary[key] = False
+            if debug: print("     Liste 'binary': Key: " + str(key) + ", Value: " + str(binary[key]))
+        
         #
         # Schalte GPIO Output
         #
