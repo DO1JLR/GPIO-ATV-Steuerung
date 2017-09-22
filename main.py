@@ -16,7 +16,7 @@ except:
 #
 # Globale Variabeln:
 #
-version = "0.1"
+version = "0.2"
 debug = False
 
 #
@@ -29,6 +29,24 @@ pins = {
     "TX":  [0, 0, 0],     # Output-Values
 }
 
+binary={
+    "0b0000": False, # 00
+    "0b0001": False, # 01
+    "0b0010": False, # 02
+    "0b0011": False, # 03
+    "0b0100": False, # 04
+    "0b0101": False, # 05
+    "0b0110": False, # 06
+    "0b0111": False, # 07
+    "0b1000": False, # 08
+    "0b1001": False, # 09
+    "0b1010": False, # 10
+    "0b1011": False, # 11
+    "0b1100": False, # 12
+    "0b1101": False, # 13
+    "0b1110": False, # 14
+    "0b1111": False, # 15
+}
 #
 # Komandozeilenargumente Auslesen
 #
@@ -78,11 +96,16 @@ def main():
             if debug: print("GPIO Input: " + str(pins["input"][i]) + " = " + str(pins["RX"][i]))
             i = i + 1
 
+        #
+        # Uebersetze Input in die variablen
+        #
+        for key, value in binary.items():
+            print(key + " " + value)
 
         #
         # Schalte GPIO Output
         #
-
+        
 
 
 
