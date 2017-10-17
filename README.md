@@ -35,25 +35,29 @@ git pull
 Als erstes erkennt das Programm, welche der Pins ein Signal haben.
 ## Input-Pins:
 | **Funktion** | **Pin** |
+|:-------|:-------------:|
 | Input  | 31  |
 | Input  | 33  |
 | Input  | 35  |
 | Input  | 37  |
 
 Diese Pins werden als Binärzahl gespeichert *(0b0000 bis 0b1111)*
-     Liste 'binary': Key: 0b1110, Value: False
-     Liste 'binary': Key: 0b1000, Value: False
-     Liste 'binary': Key: 0b1011, Value: False
-     Liste 'binary': Key: 0b1001, Value: False
-     Liste 'binary': Key: 0b1010, Value: False
-     Liste 'binary': Key: 0b0110, Value: False
-     Liste 'binary': Key: 0b0010, Value: False
-     Liste 'binary': Key: 0b0001, Value: False
-     Liste 'binary': Key: 0b0111, Value: False
-     Liste 'binary': Key: 0b1101, Value: False
-     Liste 'binary': Key: 0b0000, Value: True
-     Liste 'binary': Key: 0b0100, Value: False
-     Liste 'binary': Key: 0b0101, Value: False
-     Liste 'binary': Key: 0b0011, Value: False
-     Liste 'binary': Key: 0b1100, Value: False
-     Liste 'binary': Key: 0b1111, Value: False
+
+| **Binärzahl** | **Output** | *Funktion* |
+|:-------------:|:----------:|------------|
+| 0b0000        | 0b000      | * |
+| 0b0001        | 0b000      |  |
+| 0b0010        | 0b000      |  |
+| 0b0011        | 0b000      |  |
+| 0b0100        | 0b000      |  |
+| 0b0101        | 0b000      |  |
+| 0b0110        | 0b000      |  |
+| 0b0111        | 0b000      |  |
+| 0b1000        | 0b000      |  |
+| 0b1001        | 0b000      |  |
+| 0b1010        | 0b000      |  |
+| 0b1011        | 0b000      |  |
+| 0b1100        | 0b000      |  |
+| 0b1101        | 0b000      |  |
+| 0b1110        | 0b000      |  |
+| 0b1111        | 0b000      |  |
