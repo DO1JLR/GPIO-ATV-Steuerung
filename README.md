@@ -34,12 +34,12 @@ git pull
 # Weitere Informationen
 Als erstes erkennt das Programm, welche der Pins ein Signal haben.
 ## Input-Pins:
-| **Funktion** | **Pin** |
-|:-------|:-------------:|
-| Input  | 31  |
-| Input  | 33  |
-| Input  | 35  |
-| Input  | 37  |
+| **Funktion** | **GPIO-Pin** |
+|:-------------|:------------:|
+| Input        |  31          |
+| Input        |  33          |
+| Input        |  35          |
+| Input        |  37          |
 
 Diese Pins werden als Binärzahl gespeichert *(0b0000 bis 0b1111)*
 
