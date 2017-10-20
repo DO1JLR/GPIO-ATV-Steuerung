@@ -1,7 +1,12 @@
 # GPIO-ATV-Steuerung
 Zur Steuerung der GPIO Signale für den ATV Sender
 
+## Bekannte Angaben:
+
+Es gibt mehrere Signale, die als GPIO Input vom Raspberry Pi gelesen werden. Wenn bei allen der Signale ein Signal sein soll, dann soll der Raspberry Pi dort ein Outputsignal geben.
+
 # Setup:
+*Wie wird das Programm installiert* ***(bei Internet in der Bash auf dem Raspberry Pi)***
 
 ```bash
 # Pakete aktualisieren:
@@ -13,7 +18,7 @@ echo -e "set expandtab\nset tabstop=4\
   \nset encoding=utf-8\ncolorscheme elflord\
   \nsyntax on" > ~/.vimrc
 
-# Git clonen:
+# Projekt herunterladen:
 git clone https://github.com/DO1JLR/GPIO-ATV-Steuerung.git
 
 # Hilfetext:
@@ -23,7 +28,7 @@ git clone https://github.com/DO1JLR/GPIO-ATV-Steuerung.git
 ~/GPIO-ATV-Steuerung/main.py 
 ```
 
-# Updaten
+## Updaten
 
 ```bash
 # Aktualisieren des Programms:
@@ -31,33 +36,61 @@ cd ~/GPIO-ATV-Steuerung
 git pull
 ```
 
+# Update ohne Netzwerkanbindung:
+
+Herunterladen des letzten Releases: [Download](https://github.com/DO1JLR/GPIO-ATV-Steuerung/releases/latest)
+
 # Weitere Informationen
-Als erstes erkennt das Programm, welche der Pins ein Signal haben.
-## Input-Pins:
-| **Funktion** | **GPIO-Pin** |
-|:-------------|:------------:|
-| Input        |  31          |
-| Input        |  33          |
-| Input        |  35          |
-| Input        |  37          |
+Als erstes erkennt das Programm, welche Pins ein Input Signal haben. Basierend darauf wird dann ein oder kein Signal gegeben.
+**[Pinbelegung](https://de.pinout.xyz/)**
+*Tipp: Es wird die Kategorie: "Physical Pin" verwendet.*
 
-Diese Pins werden als Binärzahl gespeichert *(0b0000 bis 0b1111)*
+```
+Es gibt 4 Eingänge mit 1 Anschluss
+Es gibt 3 Eingänge mit 2 Anschlüssen
+Es gibt 1 Eingang mit 3 Anschlüssen
+```
+### 3 Eingänge:
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  33            |                 |
+|  35            | 36              |
+|  37            |                 |
 
-| **Binärzahl** | **Output** | *Funktion* |
-|:-------------:|:----------:|------------|
-| 0b0000        | 0b000      | * |
-| 0b0001        | 0b000      |  |
-| 0b0010        | 0b000      |  |
-| 0b0011        | 0b000      |  |
-| 0b0100        | 0b000      |  |
-| 0b0101        | 0b000      |  |
-| 0b0110        | 0b000      |  |
-| 0b0111        | 0b000      |  |
-| 0b1000        | 0b000      |  |
-| 0b1001        | 0b000      |  |
-| 0b1010        | 0b000      |  |
-| 0b1011        | 0b000      |  |
-| 0b1100        | 0b000      |  |
-| 0b1101        | 0b000      |  |
-| 0b1110        | 0b000      |  |
-| 0b1111        | 0b000      |  |
+### 2 Eingänge:
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  27            | 32              |
+|  29            |                 |
+
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  21            | 22              |
+|  23            |                 |
+
+
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  13            | 16              |
+|  15            |                 |
+
+
+### 1 Eingang:
+
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  7             | 8              |
+
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  11            | 12              |
+
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  17            | 18              |
+
+| **GPIO-Input** | **GPIO-Output** |
+|:--------------:|:---------------:|
+|  3             | 5               |
+
+
