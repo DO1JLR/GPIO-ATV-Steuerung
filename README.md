@@ -91,6 +91,6 @@ Es gibt 1 Eingang mit 3 Anschlüssen
 
 | **GPIO-Input** | **GPIO-Output** |
 |:--------------:|:---------------:|
-|  3             | 5               |
+|  38            | 40              |
 
 

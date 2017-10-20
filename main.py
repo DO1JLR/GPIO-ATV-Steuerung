@@ -16,7 +16,7 @@ except:
 #
 # Globale Variabeln:
 #
-version = "0.3"
+version = "0.4"
 debug = False
 
 #
@@ -36,12 +36,12 @@ inputpin = {
     "7":  0,
     "11": 0, 
     "19": 0, 
-    "3": 0, 
+    "38": 0, 
 }
 # 
 # Fuer jeden Output die Gruppe der Input-Pins:
 #
-output = [36, 32, 22, 15, 8, 12, 18, 5]
+output = [36, 32, 22, 15, 8, 12, 18, 40]
 outputpin = {
     "36": [33, 35, 37],
     "32": [31, 29],
@@ -50,7 +50,7 @@ outputpin = {
     "8":  [7],
     "12": [11],
     "18": [19],
-    "5":  [3],
+    "40":  [38],
 }
 #
 # Komandozeilenargumente Auslesen
@@ -89,31 +89,32 @@ def main():
                 
     if debug: print("[I] Konfigurien der GPIOs abgeschlossen\n[I] Starte 'while True'-Schleife\n")
     while True:
-        sleep(0.1)
+        sleep(0.23)
         #
         # ermittle GPIO Input Signale
         #  ...und schreibe sie in die RX Liste!
         #
+        if debug: print("\n[O]  Liste mit den Eingangssignalen:")
         i = 0
         for key, value in inputpin.items():
-            value = GPIO.input(int(key))
+            inputpin[str(key)] = GPIO.input(int(key))
             if debug: print("GPIO Input: " + str(key) + " = " + str(value))
 
         #
         # Schalte GPIO Output
         #
+        if debug: print("\n[O]  Folgendes wird geschaltet:")
         for key in output:
             makeOutput = True
-            if debug: print(key)
-            for a, i in outputpin.items():
-                if a == key:
-                    if debug: print("GPIO Output: " + str(key) + " - benoetigt wird " + str(i))
-                    if (inputpin[int(i)] == 0):
-                        makeOutput = False
+            for i in outputpin[str(key)]:
+                a = (inputpin[str(i)])
+                if debug: print("     Pin: " + str(key) + " prüfe Pin " + str(i) + " er ist auf " + str(a))
+                if a == False:
+                    makeOutput = False
             if makeOutput == True:
-                print("Setze den Output... [BALD]")
-                
-            
+                if debug: print("[I]  Setze den Output")
+            else:
+                if debug: print("[-]  Kein Output")
 
 
 
