@@ -16,36 +16,41 @@ except:
 #
 # Globale Variabeln:
 #
-version = "0.2"
+version = "0.3"
 debug = False
 
 #
 # GPIO Pin belegung: https://pinout.xyz/
 #
-pins = {
-    "input": [31, 33, 35, 37],  # Input-Pins
-    "RX": [0, 0, 0, 0],         # Input-Values
-    "output": [3, 5, 7],  # Output-Pins
-    "TX":  [0, 0, 0],     # Output-Values
+# Erstmal definieren welche Pins Input sind...
+inputpin = {
+    "33": 0,
+    "35": 0, 
+    "37": 0, 
+    "27": 0,
+    "29": 0, 
+    "21": 0,
+    "23": 0, 
+    "13": 0, 
+    "15": 0, 
+    "7":  0,
+    "11": 0, 
+    "17": 0, 
+    "3": 0, 
 }
-
-binary={
-    "0b0000": False, # 00
-    "0b0001": False, # 01
-    "0b0010": False, # 02
-    "0b0011": False, # 03
-    "0b0100": False, # 04
-    "0b0101": False, # 05
-    "0b0110": False, # 06
-    "0b0111": False, # 07
-    "0b1000": False, # 08
-    "0b1001": False, # 09
-    "0b1010": False, # 10
-    "0b1011": False, # 11
-    "0b1100": False, # 12
-    "0b1101": False, # 13
-    "0b1110": False, # 14
-    "0b1111": False, # 15
+# 
+# Fuer jeden Output die Gruppe der Input-Pins:
+#
+output = [36, 32, 22, 15, 8, 12, 18, 5]
+outputpin = {
+    "36": [33, 35, 37],
+    "32": [27, 29],
+    "22": [21, 23],
+    "15": [13, 15],
+    "8":  [7],
+    "12": [11],
+    "18": [17],
+    "5":  [3],
 }
 #
 # Komandozeilenargumente Auslesen
@@ -75,42 +80,39 @@ def main():
     GPIO.setwarnings(False) #  Keine nerfigen sinnlosen Meldungen
     GPIO.setmode(GPIO.BOARD) # Nutze BOARD nicht BCM.
     if debug: print("[I] Einrichten der Raspberry Pi GPIOs:")
-    for key, value in pins.items():
-        if debug: print("    " + key + " " + str(value) )
-        if key == "input":
-            for i in value:
-                GPIO.setup(i, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        elif key == "output":
-            for i in value:
-                GPIO.setup(i, GPIO.OUT)
+    for key, value in inputpin.items():
+        if debug: print("    Input: " + str(key) )
+        GPIO.setup(key, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    for key in output:
+        if debug: print("    Output: " + str(key) )
+        GPIO.setup(key, GPIO.OUT)
                 
     if debug: print("[I] Konfigurien der GPIOs abgeschlossen\n[I] Starte 'while True'-Schleife\n")
     while True:
         sleep(0.1)
         #
         # ermittle GPIO Input Signale
+        #  ...und schreibe sie in die RX Liste!
         #
         i = 0
-        while i < len(pins["input"]):
-            pins["RX"][i] = GPIO.input(pins["input"][i])
-            if debug: print("GPIO Input: " + str(pins["input"][i]) + " = " + str(pins["RX"][i]))
-            i = i + 1
+        for key, value in inputpin.items():
+            value = GPIO.input(key)
+            if debug: print("GPIO Input: " + str(key) + " = " + str(value))
 
-        #
-        # Uebersetze Input in die variablen
-        #
-        input_string = "0b" + str(pins["RX"][0]) + str(pins["RX"][1]) + str(pins["RX"][2])+ str(pins["RX"][3])
-        for key, value in binary.items():
-            if int(key, 2) == int(input_string, 2):
-                binary[key] = True
-            else:
-                binary[key] = False
-            if debug: print("     Liste 'binary': Key: " + str(key) + ", Value: " + str(binary[key]))
-        
         #
         # Schalte GPIO Output
         #
-        
+        for key in output:
+            makeOutput = True
+            for i in outputpin[key]:
+                if debug: print("GPIO Output: " + str(key) + " - benoetigt wird " + str(i))
+                if (inputpin[i] == 0):
+                    makeOutput = False
+            if (makeOutput == True){
+                print("Setze den Output ggf...")
+            }
+                
+            
 
 
 
