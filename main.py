@@ -27,7 +27,7 @@ inputpin = {
     "33": 0,
     "35": 0, 
     "37": 0, 
-    "27": 0,
+    "31": 0,
     "29": 0, 
     "21": 0,
     "23": 0, 
@@ -35,7 +35,7 @@ inputpin = {
     "15": 0, 
     "7":  0,
     "11": 0, 
-    "17": 0, 
+    "19": 0, 
     "3": 0, 
 }
 # 
@@ -44,12 +44,12 @@ inputpin = {
 output = [36, 32, 22, 15, 8, 12, 18, 5]
 outputpin = {
     "36": [33, 35, 37],
-    "32": [27, 29],
+    "32": [31, 29],
     "22": [21, 23],
     "15": [13, 15],
     "8":  [7],
     "12": [11],
-    "18": [17],
+    "18": [19],
     "5":  [3],
 }
 #
@@ -82,7 +82,7 @@ def main():
     if debug: print("[I] Einrichten der Raspberry Pi GPIOs:")
     for key, value in inputpin.items():
         if debug: print("    Input: " + str(key) )
-        GPIO.setup(key, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(int(key), GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     for key in output:
         if debug: print("    Output: " + str(key) )
         GPIO.setup(key, GPIO.OUT)
@@ -96,7 +96,7 @@ def main():
         #
         i = 0
         for key, value in inputpin.items():
-            value = GPIO.input(key)
+            value = GPIO.input(int(key))
             if debug: print("GPIO Input: " + str(key) + " = " + str(value))
 
         #
@@ -104,13 +104,14 @@ def main():
         #
         for key in output:
             makeOutput = True
-            for i in outputpin[key]:
-                if debug: print("GPIO Output: " + str(key) + " - benoetigt wird " + str(i))
-                if (inputpin[i] == 0):
-                    makeOutput = False
-            if (makeOutput == True){
-                print("Setze den Output ggf...")
-            }
+            if debug: print(key)
+            for a, i in outputpin.items():
+                if a == key:
+                    if debug: print("GPIO Output: " + str(key) + " - benoetigt wird " + str(i))
+                    if (inputpin[int(i)] == 0):
+                        makeOutput = False
+            if makeOutput == True:
+                print("Setze den Output... [BALD]")
                 
             
 

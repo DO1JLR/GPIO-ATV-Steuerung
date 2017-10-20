@@ -60,7 +60,7 @@ Es gibt 1 Eingang mit 3 Anschlüssen
 ### 2 Eingänge:
 | **GPIO-Input** | **GPIO-Output** |
 |:--------------:|:---------------:|
-|  27            | 32              |
+|  31            | 32              |
 |  29            |                 |
 
 | **GPIO-Input** | **GPIO-Output** |
@@ -87,7 +87,7 @@ Es gibt 1 Eingang mit 3 Anschlüssen
 
 | **GPIO-Input** | **GPIO-Output** |
 |:--------------:|:---------------:|
-|  17            | 18              |
+|  19            | 18              |
 
 | **GPIO-Input** | **GPIO-Output** |
 |:--------------:|:---------------:|
