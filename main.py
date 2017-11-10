@@ -50,7 +50,7 @@ outputpin = {
     "8":  [7],
     "12": [11],
     "18": [19],
-    "40":  [38],
+    "40": [38],
 }
 #
 # Komandozeilenargumente Auslesen
@@ -130,4 +130,5 @@ try:
 except KeyboardInterrupt:
     if debug: print("\n[I] KeyboardInterrupt erkannt\n")
     print("\n\nProgramm wird abgebrochen!\n\n Auf Wiedersehen...\n\n")
+    GPIO.cleanup()
     exit()
