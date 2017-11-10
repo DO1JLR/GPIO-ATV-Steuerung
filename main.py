@@ -112,8 +112,10 @@ def main():
                 if a == False:
                     makeOutput = False
             if makeOutput == True:
+                GPIO.output(int(key), GPIO.HIGH)
                 if debug: print("[I]  Setze den Output")
             else:
+                GPIO.output(int(key), GPIO.LOW)
                 if debug: print("[-]  Kein Output")
 
 
